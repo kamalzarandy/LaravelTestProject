@@ -1,0 +1,741 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Kamal Zarandi Laravel API test project",
+        "version": "0.1"
+    },
+    "paths": {
+        "/GetRates": {
+            "post": {
+                "tags": [
+                    "Currency"
+                ],
+                "summary": "with this route you could search for the spesific rate code",
+                "description": "with this route you could search for the spesific rate code, you need to send minimum 3 character to get the result",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "you need pass the token on he header and send minimum 3 leater to get a list of rate codes",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOeyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiO"
+                                    },
+                                    "currency": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "dollar"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "10001": {
+                        "description": "if the input validation failed then we will get this error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "10001"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "you need to send minimum 3 charachter"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "When we get minimum 3 character then a list of matched data will sent to the output",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "0": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "COMMUNITYDOLLARS"
+                                                        },
+                                                        "value": {
+                                                            "type": "string",
+                                                            "example": "Community Dollars"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "1": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "DOLA"
+                                                        },
+                                                        "value": {
+                                                            "type": "string",
+                                                            "example": "Dola USD Stablecoin"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/GetCurrencyInformation": {
+            "post": {
+                "tags": [
+                    "Currency"
+                ],
+                "summary": "with this route you could get the market information for a specific currency symbol",
+                "description": "with this route you could get the market information for a specific currency symbol, you need to send the exact symbol to this route. we will cash each currency for one hourse and if another person request the same data then we will show the data from cash system to decrease the API request call",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "you need pass the token on he header and send the symbol name to get the market information of this symbol",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOeyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiO"
+                                    },
+                                    "currency": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "COMMUNITYDOLLARS"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "10003": {
+                        "description": "if the input validation failed or we can not get the valid information from the API then we will get this error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "10003"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "We can not get the nformation from the main API"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "When we can get the market information for a symbol",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "DOLLAR"
+                                                },
+                                                "currency": {
+                                                    "type": "string",
+                                                    "example": "DOLLAR"
+                                                },
+                                                "symbol": {
+                                                    "type": "string",
+                                                    "example": "DOLLAR"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Dollar Online"
+                                                },
+                                                "logo_url": {
+                                                    "type": "string",
+                                                    "example": "https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/DOLLAR.png"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "active"
+                                                },
+                                                "price": {
+                                                    "type": "string",
+                                                    "example": "0.43286662"
+                                                },
+                                                "price_date": {
+                                                    "type": "string",
+                                                    "example": "2021-08-04T00:00:00Z"
+                                                },
+                                                "price_timestamp": {
+                                                    "type": "string",
+                                                    "example": "2021-08-04T00:00:00Z"
+                                                },
+                                                "max_supply": {
+                                                    "type": "string",
+                                                    "example": "77000000000"
+                                                },
+                                                "market_cap_dominance": {
+                                                    "type": "string",
+                                                    "example": "0.0000"
+                                                },
+                                                "num_exchanges": {
+                                                    "type": "string",
+                                                    "example": "3"
+                                                },
+                                                "num_pairs": {
+                                                    "type": "string",
+                                                    "example": "5"
+                                                },
+                                                "num_pairs_unmapped": {
+                                                    "type": "string",
+                                                    "example": "0"
+                                                },
+                                                "first_candle": {
+                                                    "type": "string",
+                                                    "example": "2019-06-07T00:00:00Z"
+                                                },
+                                                "first_trade": {
+                                                    "type": "string",
+                                                    "example": "2019-06-07T00:00:00Z"
+                                                },
+                                                "first_order_book": {
+                                                    "type": "string",
+                                                    "example": "2019-06-07T00:00:00Z"
+                                                },
+                                                "rank": {
+                                                    "type": "string",
+                                                    "example": "6854"
+                                                },
+                                                "rank_delta": {
+                                                    "type": "string",
+                                                    "example": "-47"
+                                                },
+                                                "high": {
+                                                    "type": "string",
+                                                    "example": "6.51074846"
+                                                },
+                                                "high_timestamp": {
+                                                    "type": "string",
+                                                    "example": "2019-11-15T00:00:00Z"
+                                                },
+                                                "1d": {
+                                                    "properties": {
+                                                        "volume": {
+                                                            "type": "string",
+                                                            "example": "432.06"
+                                                        },
+                                                        "price_change": {
+                                                            "type": "string",
+                                                            "example": "0.03483043"
+                                                        },
+                                                        "price_change_pct": {
+                                                            "type": "string",
+                                                            "example": "0.0875"
+                                                        },
+                                                        "volume_change": {
+                                                            "type": "string",
+                                                            "example": "5.94"
+                                                        },
+                                                        "volume_change_pct": {
+                                                            "type": "string",
+                                                            "example": "0.0139"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "30d": {
+                                                    "properties": {
+                                                        "volume": {
+                                                            "type": "string",
+                                                            "example": "432.06"
+                                                        },
+                                                        "price_change": {
+                                                            "type": "string",
+                                                            "example": "0.03483043"
+                                                        },
+                                                        "price_change_pct": {
+                                                            "type": "string",
+                                                            "example": "0.0875"
+                                                        },
+                                                        "volume_change": {
+                                                            "type": "string",
+                                                            "example": "5.94"
+                                                        },
+                                                        "volume_change_pct": {
+                                                            "type": "string",
+                                                            "example": "0.0139"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "1": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "DOLA"
+                                                },
+                                                "value": {
+                                                    "type": "string",
+                                                    "example": "Dola USD Stablecoin"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "This route will register a new user in the application, anonymouse user can register on the platform",
+                "description": "This route will register a new user in the application, anonymouse user can register on the platform. the user will insert the information if user was not exist in the platform the user will registered and a token will generrate and will send to the output. this token must used in all the request",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "pass the user information",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "confirmed_password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "kamal zarandi"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "kam.zarandy@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "11000": {
+                        "description": "When we face with the validation error or the name or email exist in the system then this message will show to the users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "11000"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, validatio error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "when User registered successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "user created sucessfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "user": {
+                                                    "properties": {
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "datetime",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "datetime",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "token_type": {
+                                                            "type": "string",
+                                                            "example": "Bearer"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NDA5MzI0Ny05M2EwLTQxMmYtYjE0ZS0yN2QwNDRjYjAzMGUiLCJqdGkiOiJhZDg2NmQ1OTg5MDY0YjQ1NDFhNzA4ZWE4NGM4OGU4MzE0N2JiZTNlMTE5ZWE5YTc3ZTZjODY0M2UwNWEwNTYxNTAyOTFkY2IzMWRkOGNkYSIsImlhdCI6MTYyODEwMzk4OSwibmJmIjoxNjI4MTAzOTg5LCJl"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "With this route user can login to the system",
+                "description": "With this route user can login to the system",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "pass the user email and password",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "kam.zarandy@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "11001": {
+                        "description": "if the input validation fales or if the user or password not exist then this message will send to the output",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "11001"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Email or password is wrong"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "when User login successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "user created sucessfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "user": {
+                                                    "properties": {
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "datetime",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "datetime",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "token_type": {
+                                                            "type": "string",
+                                                            "example": "Bearer"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NDA5MzI0Ny05M2EwLTQxMmYtYjE0ZS0yN2QwNDRjYjAzMGUiLCJqdGkiOiJhZDg2NmQ1OTg5MDY0YjQ1NDFhNzA4ZWE4NGM4OGU4MzE0N2JiZTNlMTE5ZWE5YTc3ZTZjODY0M2UwNWEwNTYxNTAyOTFkY2IzMWRkOGNkYSIsImlhdCI6MTYyODEwMzk4OSwibmJmIjoxNjI4MTAzOTg5LCJl"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "With this route user will log out from system",
+                "description": "With this route user will log out from system",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "pass the token on the header",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOeyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiO"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "when Logout sucessfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logout sucessfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/userInfo": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "With this route the user information will sent to the output",
+                "description": "With this route the user information will sent to the output",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "pass the token on the header",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOeyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiO"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "when the token will be valid, if it will not valid then you will get 500 Error code",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "user created sucessfully"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "user": {
+                                                    "properties": {
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "datetime",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "datetime",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": "user created sucessfully"
+                                                        },
+                                                        "token_type": {
+                                                            "type": "string",
+                                                            "example": "Bearer"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NDA5MzI0Ny05M2EwLTQxMmYtYjE0ZS0yN2QwNDRjYjAzMGUiLCJqdGkiOiJhZDg2NmQ1OTg5MDY0YjQ1NDFhNzA4ZWE4NGM4OGU4MzE0N2JiZTNlMTE5ZWE5YTc3ZTZjODY0M2UwNWEwNTYxNTAyOTFkY2IzMWRkOGNkYSIsImlhdCI6MTYyODEwMzk4OSwibmJmIjoxNjI4MTAzOTg5LCJl"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

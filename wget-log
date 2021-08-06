@@ -1,0 +1,11 @@
+--2021-08-05 18:27:04--  https://auth.docker.io/token?scope=repository%3Alibrary%2Fubuntu%3Apull
+Resolving auth.docker.io (auth.docker.io)... 34.197.211.151, 52.72.232.213, 54.236.165.68, ...
+Connecting to auth.docker.io (auth.docker.io)|34.197.211.151|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [application/json]
+Saving to: ‘token?scope=repository:library%2Fubuntu:pull’
+
+               token?scope=re     [<=>                                               ]       0  --.-KB/s               token?scope=repository:librar     [ <=>                                              ]   4.21K  --.-KB/s    in 0s      
+
+2021-08-05 18:27:07 (217 MB/s) - ‘token?scope=repository:library%2Fubuntu:pull’ saved [4314]
+
